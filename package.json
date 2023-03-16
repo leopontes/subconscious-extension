@@ -17,12 +17,8 @@
   "contributes": {
     "commands": [
       {
-        "command": "subconscious.olaMundo",
+        "command": "subconscious.codeComplete",
         "title": "teste"
-      },
-      {
-        "command": "subconscious.helloWorld",
-        "title": "Hello World"
       }
     ]
   },

@@ -1,11 +1,10 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
-import * as vscode from 'vscode';
 import { Configuration, OpenAIApi } from "openai";
-import { rejects } from 'assert';
+import * as vscode from 'vscode';
 const configuration = new Configuration({
 	organization: "org-FZJ5c3Bob4g1xWaBzShDAQ3o",
-	apiKey: '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'
+	apiKey: '[API_KEY]'
 });
 
 const openai = new OpenAIApi(configuration);
@@ -60,20 +59,13 @@ export function activate(context: vscode.ExtensionContext) {
 	// Now provide the implementation of the command with registerCommand
 	// The commandId parameter must match the command field in package.json
 
-	vscode.commands.registerTextEditorCommand('subconscious.olaMundo', async(textEditor: vscode.TextEditor, edit: vscode.TextEditorEdit, ...args: any[])=>{
+	let disposable = vscode.commands.registerTextEditorCommand('subconscious.codeComplete', async(textEditor: vscode.TextEditor, edit: vscode.TextEditorEdit, ...args: any[])=>{
 		const codeSugestion = await getSugestionCode(textEditor.document.getText(), true);
 		textEditor.edit((editBuilder) => {
 			editBuilder.insert(textEditor.selection.active, codeSugestion);
 		});
 	});
-
-//d6kzfpy7jcw6obocluunr5x3qdkloiqdv7eylpdyvk5j2azyvyqq
-	let disposable = vscode.commands.registerCommand('subconscious.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		//vscode.window.showInformationMessage('Hello World from subconscious!');
-	});
-
+	
 	context.subscriptions.push(disposable);
 }
 
